@@ -8,7 +8,7 @@ namespace Soenneker.Dtos.Coordinates;
 /// <summary>
 /// Represents a geographic coordinate using WGS84 latitude and longitude.
 /// </summary>
-public readonly record struct Coordinate : ISpanFormattable
+public readonly struct Coordinate : ISpanFormattable
 {
     /// <summary>
     /// Gets the latitude component in decimal degrees.
