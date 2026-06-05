@@ -34,11 +34,6 @@ public readonly struct Coordinate : ISpanFormattable
     public bool IsValid =>
         Latitude is >= -90 and <= 90 && Longitude is >= -180 and <= 180;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Coordinate"/> struct.
-    /// </summary>
-    /// <param name="latitude">The latitude component in decimal degrees.</param>
-    /// <param name="longitude">The longitude component in decimal degrees.</param>
     [System.Text.Json.Serialization.JsonConstructor]
     [Newtonsoft.Json.JsonConstructor]
     public Coordinate(double latitude, double longitude)
