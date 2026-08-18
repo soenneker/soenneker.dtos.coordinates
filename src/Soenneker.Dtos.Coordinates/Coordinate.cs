@@ -6,21 +6,19 @@ using Newtonsoft.Json;
 namespace Soenneker.Dtos.Coordinates;
 
 /// <summary>
-/// Represents a geographic coordinate using WGS84 latitude and longitude.
+/// Identifies a geographic point using WGS84 latitude and longitude expressed in decimal degrees.
 /// </summary>
 public readonly struct Coordinate : ISpanFormattable
 {
     /// <summary>
-    /// Gets the latitude component in decimal degrees.
-    /// Valid range is -90 to 90.
+    /// Latitude in decimal degrees, from -90 at the South Pole through 90 at the North Pole.
     /// </summary>
     [JsonPropertyName("latitude")]
     [JsonProperty("latitude")]
     public double Latitude { get; init; }
 
     /// <summary>
-    /// Gets the longitude component in decimal degrees.
-    /// Valid range is -180 to 180.
+    /// Longitude in decimal degrees, from -180 through 180 relative to the prime meridian.
     /// </summary>
     [JsonPropertyName("longitude")]
     [JsonProperty("longitude")]
