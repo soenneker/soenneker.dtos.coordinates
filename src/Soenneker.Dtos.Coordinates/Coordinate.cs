@@ -51,7 +51,7 @@ public readonly struct Coordinate : ISpanFormattable
     /// <returns>A string representation of the coordinate.</returns>
     public override string ToString()
     {
-        return $"{Latitude.ToString(CultureInfo.InvariantCulture)}, {Longitude.ToString(CultureInfo.InvariantCulture)}";
+        return string.Create(CultureInfo.InvariantCulture, $"{Latitude}, {Longitude}");
     }
 
     /// <summary>
@@ -78,15 +78,20 @@ public readonly struct Coordinate : ISpanFormattable
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format,
         IFormatProvider? provider)
     {
-        string value = ToString(format.Length == 0 ? null : new string(format), provider);
-
-        if (value.AsSpan().TryCopyTo(destination))
-        {
-            charsWritten = value.Length;
-            return true;
-        }
-
+        provider ??= CultureInfo.InvariantCulture;
         charsWritten = 0;
-        return false;
+
+        if (!Latitude.TryFormat(destination, out int latitudeWritten, format, provider) ||
+            destination.Length - latitudeWritten < 2)
+            return false;
+
+        destination[latitudeWritten] = ',';
+        destination[latitudeWritten + 1] = ' ';
+
+        if (!Longitude.TryFormat(destination[(latitudeWritten + 2)..], out int longitudeWritten, format, provider))
+            return false;
+
+        charsWritten = latitudeWritten + 2 + longitudeWritten;
+        return true;
     }
 }
