@@ -40,7 +40,7 @@ Constructor and formatted output order is latitude first, longitude second. GeoJ
 
 ## Serialization and formatting
 
-System.Text.Json and Newtonsoft.Json serialize the value as:
+System.Text.Json serializes the value as:
 
 ```json
 {
@@ -49,7 +49,7 @@ System.Text.Json and Newtonsoft.Json serialize the value as:
 }
 ```
 
-`IsValid` is ignored by both serializers.
+`IsValid` is ignored by System.Text.Json.
 
 `ToString()` always uses invariant culture and produces `latitude, longitude`. The `ISpanFormattable` overload applies the same numeric format and provider to both values:
 

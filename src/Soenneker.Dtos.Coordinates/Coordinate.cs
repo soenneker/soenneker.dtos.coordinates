@@ -1,7 +1,6 @@
 using System;
 using System.Globalization;
 using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 
 namespace Soenneker.Dtos.Coordinates;
 
@@ -14,21 +13,18 @@ public readonly struct Coordinate : ISpanFormattable
     /// Latitude in decimal degrees, from -90 at the South Pole through 90 at the North Pole.
     /// </summary>
     [JsonPropertyName("latitude")]
-    [JsonProperty("latitude")]
     public double Latitude { get; init; }
 
     /// <summary>
     /// Longitude in decimal degrees, from -180 through 180 relative to the prime meridian.
     /// </summary>
     [JsonPropertyName("longitude")]
-    [JsonProperty("longitude")]
     public double Longitude { get; init; }
 
     /// <summary>
     /// Gets whether the coordinate is within valid geographic bounds.
     /// </summary>
     [System.Text.Json.Serialization.JsonIgnore]
-    [Newtonsoft.Json.JsonIgnore]
     public bool IsValid =>
         Latitude is >= -90 and <= 90 && Longitude is >= -180 and <= 180;
 
@@ -38,7 +34,6 @@ public readonly struct Coordinate : ISpanFormattable
     /// <param name="latitude">Latitude in decimal degrees.</param>
     /// <param name="longitude">Longitude in decimal degrees.</param>
     [System.Text.Json.Serialization.JsonConstructor]
-    [Newtonsoft.Json.JsonConstructor]
     public Coordinate(double latitude, double longitude)
     {
         Latitude = latitude;
